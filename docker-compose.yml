@@ -1,0 +1,24 @@
+version: '3.8'
+
+services:
+  vexor-backend:
+    build: .
+    ports:
+      - "8000:8000"
+    environment:
+      - SECRET_KEY=${SECRET_KEY:-vexor-dev-secret-change-in-prod}
+      - GROQ_API_KEY=${GROQ_API_KEY}
+      - NVIDIA_API_KEY=${NVIDIA_API_KEY}
+      - OPENROUTER_API_KEY=${OPENROUTER_API_KEY}
+      - HUGGINGFACE_API_KEY=${HUGGINGFACE_API_KEY}
+    volumes:
+      - vexor_data:/app/data
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  vexor_data:
