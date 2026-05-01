@@ -10,6 +10,7 @@ from app.database.db import init_db
 from app.auth.router import router as auth_router
 from app.ai.router import router as ai_router
 from app.api.scan import router as scan_router
+from app.api.osint import router as osint_router
 
 
 @asynccontextmanager
@@ -36,6 +37,7 @@ app.add_middleware(
 app.include_router(auth_router, prefix="/api/v1/auth", tags=["auth"])
 app.include_router(ai_router, prefix="/api/v1/ai", tags=["ai"])
 app.include_router(scan_router, prefix="/api/v1/scan", tags=["scan"])
+app.include_router(osint_router, prefix="/api/v1/osint", tags=["osint"])
 
 
 @app.get("/api/v1/health")
