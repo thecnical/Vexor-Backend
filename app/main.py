@@ -11,6 +11,7 @@ from app.auth.router import router as auth_router
 from app.ai.router import router as ai_router
 from app.api.scan import router as scan_router
 from app.api.osint import router as osint_router
+from app.api.sync import router as sync_router
 
 
 @asynccontextmanager
@@ -34,10 +35,11 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-app.include_router(auth_router, prefix="/api/v1/auth", tags=["auth"])
-app.include_router(ai_router, prefix="/api/v1/ai", tags=["ai"])
-app.include_router(scan_router, prefix="/api/v1/scan", tags=["scan"])
-app.include_router(osint_router, prefix="/api/v1/osint", tags=["osint"])
+app.include_router(auth_router, prefix="/api/v1/auth",  tags=["auth"])
+app.include_router(ai_router,   prefix="/api/v1/ai",    tags=["ai"])
+app.include_router(scan_router, prefix="/api/v1/scan",  tags=["scan"])
+app.include_router(osint_router,prefix="/api/v1/osint", tags=["osint"])
+app.include_router(sync_router, prefix="/api/v1/sync",  tags=["sync"])
 
 
 @app.get("/api/v1/health")
